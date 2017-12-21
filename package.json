@@ -1,0 +1,22 @@
+{
+  "name": "microgram",
+  "version": "0.1.0",
+  "description": "Micro telegram api implementation, no dependencies",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests"
+  },
+  "keywords": [
+    "telegram",
+    "api"
+  ],
+  "author": "Carlo Colombo <carlo.colombo@gmx.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "lodash": "^4.17.4",
+    "mocha": "^4.0.1",
+    "nock": "^9.1.4",
+    "should": "^13.1.3",
+    "sinon": "^4.1.3"
+  }
+}

@@ -32,19 +32,19 @@ const request = (host, path, data) =>
 
 function apiFactory(request) {
   return class Api {
-    constructor(telegram_key) {
-      this.telegram_key = telegram_key
+    constructor(telegramKey) {
+      this.telegramKey = telegramKey
       this.hostname = 'api.telegram.org'
     }
     getUpdates(offset = 0) {
-      return request(this.hostname, `/bot${this.telegram_key}/getUpdates`, {
+      return request(this.hostname, `/bot${this.telegramKey}/getUpdates`, {
         offset
       })
     }
     sendFullMessage(message) {
       return request(
         this.hostname,
-        `/bot${this.telegram_key}/sendMessage`,
+        `/bot${this.telegramKey}/sendMessage`,
         message
       )
     }

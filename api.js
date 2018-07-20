@@ -4,7 +4,6 @@ const querystring = require('querystring')
 const request = (host, path, data) =>
   new Promise((resolve, reject) => {
     const payload = JSON.stringify(data)
-
     const req = https.request(
       {
         host,
@@ -50,6 +49,16 @@ function apiFactory(request) {
     }
     sendMessage(chat_id, text, options) {
       return this.sendFullMessage(Object.assign({ chat_id, text }, options))
+    }
+    getFile(file_id) {
+      return request(
+        this.hostname,
+        `/bot${this.telegramKey}/getFile?file_id=${file_id}`,
+        {}
+      ).then(
+        ({ result: { file_path } }) =>
+          `https://${this.hostname}/file/bot${this.telegramKey}/${file_path}`
+      )
     }
   }
 }

@@ -58,5 +58,23 @@ describe('api-telegram', () => {
         )
       })
     })
+
+    describe('#getFile', () => {
+      it('makes a request to proper endpoint', async () => {
+        request = sinon.stub()
+        request.returns(Promise.resolve({ result: { file_path: 'fooPath' } }))
+        api = new (apiFactory(request))('-token')
+        const fileUrl = await api.getFile('file-id')
+
+        should(fileUrl).be.eql(`https://${api.hostname}/file/bot-token/fooPath`)
+
+        sinon.assert.calledWith(
+          request,
+          api.hostname,
+          '/bot-token/getFile?file_id=file-id',
+          {}
+        )
+      })
+    })
   })
 })

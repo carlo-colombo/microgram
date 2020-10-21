@@ -6,10 +6,26 @@ const { map, noop } = require('lodash')
 describe('api-telegram', () => {
   describe('Api', () => {
     let request, api
+
     beforeEach(() => {
       request = sinon.spy()
       api = new (apiFactory(request))('-token')
     })
+
+    describe('instantiation', ()=>{
+      it('throws if token is missing', ()=>{
+        should.throws(
+          ()=> new (apiFactory(()=>{}))('')
+        )
+        should.throws(
+          ()=> new (apiFactory(()=>{}))(undefined)
+        )
+        should.throws(
+          ()=> new (apiFactory(()=>{}))(null)
+        )
+      })
+    })
+
     describe('#getUpdates', () => {
       it('make a request to endpoint with offset == 0', () => {
         api.getUpdates()

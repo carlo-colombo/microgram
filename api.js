@@ -1,5 +1,4 @@
 const https = require('https')
-const querystring = require('querystring')
 
 const request = (host, path, data) =>
   new Promise((resolve, reject) => {
@@ -32,6 +31,9 @@ const request = (host, path, data) =>
 function apiFactory(request) {
   return class Api {
     constructor(telegramKey) {
+      if (!telegramKey){
+        throw 'invalid token, empty or null'
+      }
       this.telegramKey = telegramKey
       this.hostname = 'api.telegram.org'
     }
